@@ -1,17 +1,19 @@
+#!/usr/local/bin/node
+
 const express = require('express');
 const { MongoClient } = require('mongodb');
 const getParsehubData = require('./getParsehubData');
 const proj_tokens = require('./projectTokens');
-
+const scheduleRun = require('./scheduleRun');
 
 let normalizedObj = {};
 
-getParsehubData(proj_tokens.chestnutFarm).then((result)=>{
-  normalizedObj = result;
-  console.log(normalizedObj);
-}).catch((err)=> {
-  console.log(err);
-})
+// getParsehubData(proj_tokens.knitHappens).then((result)=>{
+//   normalizedObj = result;
+//   console.log(normalizedObj);
+// }).catch((err)=> {
+//   console.log(err);
+// })
 
 // mongodb connection
 // async function mongodbConnect(){
@@ -37,13 +39,24 @@ getParsehubData(proj_tokens.chestnutFarm).then((result)=>{
 // mongodbConnect().catch(console.error);
 
 
+// scheduleRun(proj_tokens.knitHappens);
+
 // express server setup
 const app = express();
 const port = 8000;
-app.get('/', (req, res) => {
-  res.send('Parsehub API script')
+
+// webhook
+app.use(express.json());
+// app.use(express.urlencoded({
+//   extended: true
+// }));
+app.post("/", (req, res) => {
+  console.log(req.body) // Call your action on the request here
+                        // this is where the getParsehubData() fn will go
+  res.status(200).end() // Responding is important
 })
+
 app.listen(port, () => {
-  // console.log(`Parsehub API script listening at http://localhost:${port}`)
+  console.log(`Parsehub API script listening at http://localhost:${port}`)
   return;
 })

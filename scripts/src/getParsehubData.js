@@ -10,6 +10,8 @@ function rename_param(obj, old_name, new_name) {
 
 function getParsehubData( proj_token ) {
 
+  let today = new Date().toLocaleDateString()
+
   return new Promise((resolve, reject) => {
     let last_run_obj = {};
 
@@ -59,12 +61,12 @@ function getParsehubData( proj_token ) {
                   products[i]['store'] = {};
                   products[i]['location'] = {}; 
                   products[i]['dataSource'] = {};
-                  products[i]['ingestionDate'] = {};
+                  products[i]['ingestionDate'] = today;
 
                   new_records.push(products[i]);
                 }
               }
-              resolve(new_records);
+              resolve(last_run_obj);
               break;
 
             // ***************************
@@ -100,7 +102,7 @@ function getParsehubData( proj_token ) {
                       products[k]['store'] = {};
                       products[k]['location'] = {};
                       products[k]['dataSource'] = {};
-                      products[k]['ingestionDate'] = {};
+                      products[k]['ingestionDate'] = {today};
                       
                       new_records.push(products[k]);
                     }
@@ -130,7 +132,7 @@ function getParsehubData( proj_token ) {
                   products[j]['store'] = {};
                   products[j]['location'] = {};
                   products[j]['dataSource'] = {};
-                  products[j]['ingestionDate'] = {};
+                  products[j]['ingestionDate'] = today;
 
                   new_records.push(products[j]);
                 }
@@ -161,7 +163,7 @@ function getParsehubData( proj_token ) {
                   products[j]['store'] = {};
                   products[j]['location'] = {};
                   products[j]['dataSource'] = {};
-                  products[j]['ingestionDate'] = {};
+                  products[j]['ingestionDate'] = today;
 
                   new_records.push(products[i]);
                 }
@@ -194,7 +196,7 @@ function getParsehubData( proj_token ) {
                   products[i]['store'] = {};
                   products[i]['location'] = {};
                   products[i]['dataSource'] = {};
-                  products[i]['ingestionDate'] = {};
+                  products[i]['ingestionDate'] = today;
 
                   new_records.push(products[i]);
                 }
